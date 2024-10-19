@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { debounce } from "lodash";
 import DisplayMenu from "./display-menu";
 import SuggestionsList from "./suggestions-list";
@@ -10,10 +10,12 @@ const AutoSuggestion = () => {
   const [isAutoSuggest, setIsAutoSuggest] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(0);
+  const inputRef = useRef();
   const handleInputChange = (event) => {
     setSuggestedMenu(null);
     setInputValue(event.target.value.toLowerCase());
   };
+  const debounceInputChange = useCallback(debounce(handleInputChange, 300), []);
   const handleAutoSuggestion = (inputValue) => {
     setIsLoading(true);
     fetch(`https://dummyjson.com/recipes/search?q=${inputValue}`)
@@ -26,16 +28,16 @@ const AutoSuggestion = () => {
         setIsLoading(false);
       });
   };
-  const debounceFunction = useCallback(debounce(handleAutoSuggestion, 300), []);
   const handleSuggestionClick = (oSuggestion) => {
     setSuggestedMenu(oSuggestion);
     setIsAutoSuggest(false);
     setInputValue(oSuggestion.name.toLowerCase());
   };
   useEffect(() => {
+    inputRef.current.value = inputValue;
     setFocusedIndex(0);
     if (isAutoSuggest && inputValue.length) {
-      debounceFunction(inputValue);
+        handleAutoSuggestion(inputValue);
     } else {
       setAutoSuggestions([]);
       setIsAutoSuggest(true);
@@ -84,7 +86,7 @@ const AutoSuggestion = () => {
   return (
     <div className="main-container" onKeyDown={handleKeyDown}>
       <div className="input-container">
-        <input type="text" value={inputValue} onChange={handleInputChange} />
+        <input type="text" placeholder="Enter recipe name to search" ref={inputRef} onChange={debounceInputChange} />
         <button onClick={handleClear}>Clear</button>
       </div>
       <div className="suggestions-container">
