@@ -9,7 +9,7 @@ Features:
 - When search is done or even while typing, user can click on the Clear button beside the Searchbar to clear all inpiuts and suggestions
 
 ## Inital Screen
-![image](https://github.com/user-attachments/assets/07ee2856-8fc0-46de-9965-eb191c2a522c)
+![image](https://github.com/user-attachments/assets/cf9b9158-258c-4b72-9073-1724e0444136)
 
 ## Screen showing auto suggestions when search is in progress
 ![image](https://github.com/user-attachments/assets/5e94659a-a993-485c-8748-9c6a75f8bcd1)
