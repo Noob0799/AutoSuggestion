@@ -2,7 +2,7 @@
 A webapp built using React to demonstrate the auto-suggest functionality in searchbar.  
 Link to live web server: https://noob-auto-suggestion.netlify.app/  
 Features:  
-- Search suggestions will start to show automatically on starting to type in the Search Bar
+- Search suggestions will start to show automatically on starting to type in the Search Bar. Debouncing is used for optimizing the Search performance
 - Arrow Up and Down keys can be used to navigate through the suggestions
 - User can use mouse-click or hit Enter on keyboard to select a particular suggestion
 - The corresponding details of the Recipe selected will display on the page
