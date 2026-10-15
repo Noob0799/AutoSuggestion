@@ -1,29 +1,50 @@
 # Auto Suggestion on Search
-A webapp built using React to demonstrate the auto-suggest functionality in searchbar.  
-Link to live web server: https://noob-auto-suggestion.netlify.app/  
-Features:  
-- Search suggestions will start to show automatically on starting to type in the Search Bar. Debouncing is used for optimizing the Search performance
-- Arrow Up and Down keys can be used to navigate through the suggestions
-- User can use mouse-click or hit Enter on keyboard to select a particular suggestion
-- The corresponding details of the Recipe selected will display on the page
-- When search is done or even while typing, user can click on the Clear button beside the Searchbar to clear all inpiuts and suggestions
 
-Also: stale in-flight requests are aborted, results are cached per query, Escape / click-outside closes the dropdown, loading / empty / error states are shown, and the input follows the ARIA combobox pattern.
+A typeahead / auto-suggest search built with **React + Vite**. Type a recipe name and get live suggestions from the [DummyJSON recipes API](https://dummyjson.com/docs/recipes).
+
+Live demo: https://noob-auto-suggestion.netlify.app/
+
+## Features
+- Suggestions appear as you type, with the matched text highlighted
+- **Debounced** input (300ms) so the API isn't hit on every keystroke
+- In-flight requests are **aborted** when the query changes, so stale responses never overwrite newer ones
+- Results are **cached** per query
+- Keyboard support: `ArrowUp` / `ArrowDown` to navigate, `Enter` to select, `Escape` to close
+- Mouse support: click a suggestion to select it, click outside to close
+- Loading, empty ("No results found") and error states
+- `Clear` button resets the input, suggestions and selected recipe
+- Accessible: ARIA combobox / listbox pattern with `aria-activedescendant`
+
+## Screenshots
+
+### Initial screen
+![Initial screen](docs/initial.png)
+
+### Suggestions while typing
+![Suggestions while typing](docs/suggestions.png)
+
+### Selected recipe (via click or Enter)
+![Selected recipe](docs/selected.png)
 
 ## Run locally
-Built with Vite + React.
-```
+```bash
 npm install
 npm run dev      # start dev server
-npm test         # run vitest suite
+npm test         # run the Vitest suite
 npm run build    # production build into dist/
 ```
 
-## Inital Screen
-![image](https://github.com/user-attachments/assets/cf9b9158-258c-4b72-9073-1724e0444136)
-
-## Screen showing auto suggestions when search is in progress
-![image](https://github.com/user-attachments/assets/5e94659a-a993-485c-8748-9c6a75f8bcd1)
-
-## Screen showing recipe selected either by mouse-click or by hitting Enter button
-![image](https://github.com/user-attachments/assets/864a4b6e-1a5e-4439-9fd7-f2cde4d472cb)
+## Project structure
+```
+src/
+  components/
+    AutoSuggestion.jsx   state, keyboard handling, ARIA
+    SuggestionsList.jsx  list rendering, highlight, scroll into view
+    DisplayMenu.jsx      selected recipe card
+  hooks/
+    useDebounce.js       generic debounce hook
+    useSuggestions.js    fetch + AbortController + cache
+  services/recipes.js    API call
+  utils/highlight.js     regex-free match highlighting
+  __tests__/             unit and component tests
+```
