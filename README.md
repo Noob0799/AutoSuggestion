@@ -8,6 +8,17 @@ Features:
 - The corresponding details of the Recipe selected will display on the page
 - When search is done or even while typing, user can click on the Clear button beside the Searchbar to clear all inpiuts and suggestions
 
+Also: stale in-flight requests are aborted, results are cached per query, Escape / click-outside closes the dropdown, loading / empty / error states are shown, and the input follows the ARIA combobox pattern.
+
+## Run locally
+Built with Vite + React.
+```
+npm install
+npm run dev      # start dev server
+npm test         # run vitest suite
+npm run build    # production build into dist/
+```
+
 ## Inital Screen
 ![image](https://github.com/user-attachments/assets/cf9b9158-258c-4b72-9073-1724e0444136)
 

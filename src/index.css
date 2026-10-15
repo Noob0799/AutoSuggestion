@@ -51,17 +51,39 @@ button:hover {
   color: white;
 }
 
+.search-wrapper {
+  position: relative;
+  width: 80%;
+}
+
+.search-wrapper .input-container {
+  width: 100%;
+}
+
 .suggestions-container {
-  width: 65%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 80%;
   max-height: 500px;
   overflow: auto;
-  border: none;
   border-radius: 0 0 5px 5px;
   margin-top: 5px;
   box-shadow: 0 0 10px grey;
-  position: absolute;
-  top: 125px;
+  background-color: white;
   z-index: 1000;
+}
+
+.suggestions-list {
+  list-style: none;
+}
+
+.suggestion-message {
+  padding: 10px 20px;
+}
+
+.suggestion-message.error {
+  color: crimson;
 }
 
 .suggestion {
@@ -76,7 +98,7 @@ button:hover {
   color: blue;
 }
 
-.suggestions-container > div:hover, .focused-suggestion {
+.suggestion:hover, .focused-suggestion {
   background-color: lightgrey;
 }
 
